@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Happy Birthday with Google Drive Background</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <style>
+    body, html {
+      margin: 0; padding: 0; height: 100%; overflow: hidden; background: #000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+    }
+    .bg-image {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      opacity: 0.7;
+      transition: opacity 1s ease-in-out;
+    }
+    .glass-box {
+      position: relative;
+      background: rgba(255 255 255 / 0.15);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      padding: 2rem;
+      max-width: 400px;
+      margin: auto;
+      text-align: center;
+      box-shadow: 0 0 20px rgb(255 255 255 / 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <img
+    src="https://drive.google.com/uc?export=view&id=1JupcY3t6ZrqSo98c1XLFpc3GXGu_Cdab"
+    alt="Background"
+    class="bg-image"
+    id="bgImage"
+  />
+
+  <div class="glass-box animate__animated animate__fadeIn" id="cardContainer">
+    <!-- Isi kartu akan muncul di sini -->
+  </div>
+
+  <script>
+    // Ganti dengan link Google Drive yang sudah diubah jadi direct link (uc?export=view&id=FILE_ID)
+    const images = [
+      "https://drive.google.com/uc?export=view&id=1JupcY3t6ZrqSo98c1XLFpc3GXGu_Cdab",
+      "https://drive.google.com/uc?export=view&id=1aX_MZSGWdyT4vS-jhRSOQxFwAj0vTrsY",
+      "https://drive.google.com/uc?export=view&id=1HuF4HvNqD-kQETfR-DzclQ2gDvt78I9Z",
+      "https://drive.google.com/uc?export=view&id=1zRr-_AzR2WqTuznLH5TlIbJp2Ohku1Kw",
+      "https://drive.google.com/uc?export=view&id=1TJqP2mcGI8UfMHQfQU3M-HC97vlSn11x"
+    ];
+
+    let imgIndex = 0;
+    const bgImage = document.getElementById('bgImage');
+
+    // Fungsi ganti background dengan efek fade
+    function changeBackground() {
+      imgIndex = (imgIndex + 1) % images.length;
+      bgImage.style.opacity = 0;
+      setTimeout(() => {
+        bgImage.src = images[imgIndex];
+        bgImage.style.opacity = 0.7;
+      }, 1000);
+    }
+    // Ganti background tiap 8 detik
+    setInterval(changeBackground, 8000);
+
+    // Isi ucapan bertahap
+    const cards = [
+      `<h2 class="text-3xl font-bold mb-4">Halo Bang Koding! 🎂</h2>
+       <p>Hari ini hari spesialmu, kita semua mau bilang...</p>
+       <button onclick="nextCard()" class="mt-6 px-6 py-2 bg-blue-600 rounded hover:bg-blue-800 transition">Lanjutkan ➡️</button>`,
+
+      `<h2 class="text-3xl font-bold mb-4">Selamat Ulang Tahun! 🎉</h2>
+       <p>Semoga makin sukses, makin bijak, dan makin keren yaa!</p>
+       <button onclick="nextCard()" class="mt-6 px-6 py-2 bg-blue-600 rounded hover:bg-blue-800 transition">Lanjutkan ➡️</button>`,
+
+      `<h2 class="text-3xl font-bold mb-4">Doa Terbaik 🎈</h2>
+       <p>Semoga rezekimu lancar, sehat selalu, dan bahagia terus bersama orang tersayang.</p>
+       <button onclick="nextCard()" class="mt-6 px-6 py-2 bg-blue-600 rounded hover:bg-blue-800 transition">Lanjutkan ➡️</button>`,
+
+      `<h2 class="text-3xl font-bold mb-4">Jangan Lupa...</h2>
+       <p>Tetap semangat berkarya dan berbagi ilmu ya. Dunia butuh orang hebat seperti kamu!</p>
+       <button onclick="nextCard()" class="mt-6 px-6 py-2 bg-blue-600 rounded hover:bg-blue-800 transition">Lanjutkan ➡️</button>`,
+
+      `<h2 class="text-3xl font-bold mb-4">Hadiah Spesial 🎁</h2>
+       <p>Dari kami semua yang selalu dukung kamu, ini ada sesuatu untukmu...</p>
+       <button onclick="nextCard()" class="mt-6 px-6 py-2 bg-yellow-400 text-black font-semibold rounded hover:bg-yellow-500 transition">Lihat Hadiah 🎥</button>`,
+
+      `<h2 class="text-3xl font-bold mb-4">Kejutan Video 🎬</h2>
+       <p>Semoga kamu suka videonya. Selamat menikmati!</p>
+       <iframe class="w-full rounded mb-4" height="215" src="https://www.youtube.com/embed/IGrZs0KO2a4" title="Hadiah Video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+       <button onclick="location.reload()" class="mt-4 px-6 py-2 bg-red-500 rounded hover:bg-red-700 transition">🔁 Ulangi Lagi</button>`
+    ];
+
+    let currentCard = 0;
+    const cardContainer = document.getElementById('cardContainer');
+
+    function nextCard() {
+      if (currentCard < cards.length) {
+        cardContainer.innerHTML = cards[currentCard];
+        currentCard++;
+      }
+    }
+
+    window.onload = () => nextCard();
+
+  </script>
+</body>
+</html>
+
